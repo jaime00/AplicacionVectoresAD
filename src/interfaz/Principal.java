@@ -17,8 +17,10 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
+    double v[];
     public Principal() {
         initComponents();
+        txtLongitud.requestFocusInWindow();
     }
 
     /**
@@ -42,7 +44,8 @@ public class Principal extends javax.swing.JFrame {
         cmdMostrar = new javax.swing.JButton();
         cmdBorrar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        txtlResultado = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtResultado = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,7 +64,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jPanel3.add(txtLongitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 70, -1));
 
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 180, 70));
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 210, 80));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         jLabel2.setText("MANEJO DE VECTORES");
@@ -76,10 +79,15 @@ public class Principal extends javax.swing.JFrame {
                 cmdCrearActionPerformed(evt);
             }
         });
-        jPanel4.add(cmdCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 110, 30));
+        jPanel4.add(cmdCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 110, 40));
 
         cmdLlenarManual.setText("Llenar Manual");
-        jPanel4.add(cmdLlenarManual, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 110, 30));
+        cmdLlenarManual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdLlenarManualActionPerformed(evt);
+            }
+        });
+        jPanel4.add(cmdLlenarManual, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 110, 50));
 
         cmdAutomatico.setText("Llenar Automatico");
         cmdAutomatico.addActionListener(new java.awt.event.ActionListener() {
@@ -87,10 +95,15 @@ public class Principal extends javax.swing.JFrame {
                 cmdAutomaticoActionPerformed(evt);
             }
         });
-        jPanel4.add(cmdAutomatico, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 110, 30));
+        jPanel4.add(cmdAutomatico, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 110, 40));
 
         cmdMostrar.setText("Mostrar");
-        jPanel4.add(cmdMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 110, 30));
+        cmdMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdMostrarActionPerformed(evt);
+            }
+        });
+        jPanel4.add(cmdMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 110, 40));
 
         cmdBorrar.setText("Borrar");
         cmdBorrar.addActionListener(new java.awt.event.ActionListener() {
@@ -98,30 +111,34 @@ public class Principal extends javax.swing.JFrame {
                 cmdBorrarActionPerformed(evt);
             }
         });
-        jPanel4.add(cmdBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 110, 30));
+        jPanel4.add(cmdBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 110, 40));
 
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 130, 240));
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, 130, 300));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Resultados:"));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtlResultado.setEditable(false);
-        jPanel1.add(txtlResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 180, 130));
+        txtResultado.setEditable(false);
+        txtResultado.setColumns(20);
+        txtResultado.setRows(5);
+        jScrollPane1.setViewportView(txtResultado);
 
-        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 200, 160));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 180, 120));
+
+        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 210, 180));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -129,7 +146,14 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdAutomaticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAutomaticoActionPerformed
-        // TODO add your handling code here:
+    
+         double n;
+        for (int i = 0; i < v.length; i++) {
+            n=(int)(Math.random()*50+ 1);
+            v[i]=n; 
+        
+        }
+        JOptionPane.showMessageDialog(this, "Vector llenado automaticamente correctamente ");
     }//GEN-LAST:event_cmdAutomaticoActionPerformed
 
     private void txtLongitudKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLongitudKeyTyped
@@ -142,26 +166,47 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtLongitudKeyTyped
 
     private void cmdCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCrearActionPerformed
-
+        int longitud;
         if(txtLongitud.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(this, "Digite la logitud del vector","ERROR",JOptionPane.ERROR_MESSAGE);
             txtLongitud.requestFocusInWindow();
         
-        }else if(txtLongitud.getText().trim().equals("0")){
+        }else if(Integer.parseInt(txtLongitud.getText().trim())==0){
             JOptionPane.showMessageDialog(this,"La longitud no puede ser cero","ERROR",JOptionPane.ERROR_MESSAGE);
             txtLongitud.requestFocusInWindow();
             txtLongitud.selectAll();
             
+        }else{
+            longitud=Integer.parseInt(txtLongitud.getText());
+            v= new double [longitud]; 
+            JOptionPane.showConfirmDialog(this, "Vector creado exitosamente");
         }
     }//GEN-LAST:event_cmdCrearActionPerformed
 
     private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
 
         txtLongitud.setText("");
-        txtlResultado.setText("");
+        txtResultado.setText("");
+        v= null;
         
         txtLongitud.requestFocusInWindow();
     }//GEN-LAST:event_cmdBorrarActionPerformed
+
+    private void cmdLlenarManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLlenarManualActionPerformed
+        Double n;
+        for (int i = 0; i < v.length; i++) {
+           n=Double.parseDouble(JOptionPane.showInputDialog(this, "Digite el elemento en la posicion (no."+i+")"));
+           v[i]=n; 
+        }
+    }//GEN-LAST:event_cmdLlenarManualActionPerformed
+
+    private void cmdMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdMostrarActionPerformed
+
+        for (int i = 0; i < v.length; i++) {
+          txtResultado.append(v[i]+"\n");
+            
+        }
+    }//GEN-LAST:event_cmdMostrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -210,7 +255,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtLongitud;
-    private javax.swing.JTextField txtlResultado;
+    private javax.swing.JTextArea txtResultado;
     // End of variables declaration//GEN-END:variables
 }
