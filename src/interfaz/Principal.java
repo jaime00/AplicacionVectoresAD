@@ -6,6 +6,8 @@
 
 package interfaz;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author jtorres61
@@ -51,6 +53,12 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel1.setText("Longitud:");
         jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        txtLongitud.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtLongitudKeyTyped(evt);
+            }
+        });
         jPanel3.add(txtLongitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 70, -1));
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 180, 70));
@@ -63,6 +71,11 @@ public class Principal extends javax.swing.JFrame {
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cmdCrear.setText("Crear");
+        cmdCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdCrearActionPerformed(evt);
+            }
+        });
         jPanel4.add(cmdCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 110, 30));
 
         cmdLlenarManual.setText("Llenar Manual");
@@ -80,12 +93,19 @@ public class Principal extends javax.swing.JFrame {
         jPanel4.add(cmdMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 110, 30));
 
         cmdBorrar.setText("Borrar");
+        cmdBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBorrarActionPerformed(evt);
+            }
+        });
         jPanel4.add(cmdBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 110, 30));
 
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 130, 240));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Resultados:"));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtlResultado.setEditable(false);
         jPanel1.add(txtlResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 180, 130));
 
         jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 200, 160));
@@ -111,6 +131,37 @@ public class Principal extends javax.swing.JFrame {
     private void cmdAutomaticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAutomaticoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmdAutomaticoActionPerformed
+
+    private void txtLongitudKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLongitudKeyTyped
+
+         char c=evt.getKeyChar(); 
+          if(!Character.isDigit(c)) { 
+              getToolkit().beep(); 
+              evt.consume(); 
+          }  
+    }//GEN-LAST:event_txtLongitudKeyTyped
+
+    private void cmdCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCrearActionPerformed
+
+        if(txtLongitud.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Digite la logitud del vector","ERROR",JOptionPane.ERROR_MESSAGE);
+            txtLongitud.requestFocusInWindow();
+        
+        }else if(txtLongitud.getText().trim().equals("0")){
+            JOptionPane.showMessageDialog(this,"La longitud no puede ser cero","ERROR",JOptionPane.ERROR_MESSAGE);
+            txtLongitud.requestFocusInWindow();
+            txtLongitud.selectAll();
+            
+        }
+    }//GEN-LAST:event_cmdCrearActionPerformed
+
+    private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
+
+        txtLongitud.setText("");
+        txtlResultado.setText("");
+        
+        txtLongitud.requestFocusInWindow();
+    }//GEN-LAST:event_cmdBorrarActionPerformed
 
     /**
      * @param args the command line arguments
