@@ -21,12 +21,13 @@ public class Principal extends javax.swing.JFrame {
     double v[];
     public Principal() {
         initComponents();
-        
         cmdCrear.setEnabled(true);
         cmdBorrar.setEnabled(true);
         cmdLlenarManual.setEnabled(false);
         cmdAutomatico.setEnabled(false);
         cmdMostrar.setEnabled(false);
+        
+        txtLongitud.requestFocusInWindow();
  
     }
 
@@ -218,9 +219,21 @@ public class Principal extends javax.swing.JFrame {
 
     private void cmdLlenarManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLlenarManualActionPerformed
         Double n;
+        int sw;
         for (int i = 0; i < v.length; i++) {
-           n=Double.parseDouble(JOptionPane.showInputDialog(this, "Digite el elemento (pos."+i+")"));
-           v[i]=n; 
+            do{
+                sw=1;
+            try{
+            n=Double.parseDouble(JOptionPane.showInputDialog(this, "Digite el elemento (pos."+i+")"));
+           v[i]=n;
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(this, "Digite un numero valido","Error",JOptionPane.ERROR_MESSAGE);
+                sw=0;
+            }catch(NullPointerException e){
+                JOptionPane.showMessageDialog(this, "No puede salir","ERROR",JOptionPane.ERROR_MESSAGE);
+                sw=0;
+            }
+            }while (sw==0);
         }
         cmdCrear.setEnabled(false);
         cmdLlenarManual.setEnabled(false);
