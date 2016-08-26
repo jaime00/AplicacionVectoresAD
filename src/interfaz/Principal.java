@@ -219,7 +219,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void cmdLlenarManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLlenarManualActionPerformed
         Double n;
-        int sw;
+        int sw,res;
         for (int i = 0; i < v.length; i++) {
             do{
                 sw=1;
@@ -229,9 +229,15 @@ public class Principal extends javax.swing.JFrame {
             }catch(NumberFormatException e){
                 JOptionPane.showMessageDialog(this, "Digite un numero valido","Error",JOptionPane.ERROR_MESSAGE);
                 sw=0;
-            }catch(NullPointerException e){
-                JOptionPane.showMessageDialog(this, "No puede salir","ERROR",JOptionPane.ERROR_MESSAGE);
-                sw=0;
+            } catch(NullPointerException e){
+              res=JOptionPane.showConfirmDialog(this, "¿Seguro que desea salir?","Salir",JOptionPane.YES_NO_OPTION);
+              if(res==0){
+                  sw=1;
+                  i=v.length;
+              }  else{
+                  sw=0;
+              }
+
             }
             }while (sw==0);
         }
